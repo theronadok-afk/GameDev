@@ -11,11 +11,13 @@ boolean play;
 ArrayList<Rock> rocks = new ArrayList<Rock>();
 ArrayList<Laser> lasers = new ArrayList<Laser>();
 ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
+ArrayList<Boss> bosses = new ArrayList<Boss>();
 PImage back1;
 import gifAnimation.*;
 Gif s1gif;
 Timer rDist;
 Timer pDist;
+Timer bDist;
 void setup() {
   s1gif = new Gif(this, "player.gif");
   s1gif.play();
@@ -26,6 +28,7 @@ void setup() {
   rDist.start();
   pDist = new Timer(7500);
   pDist.start();
+  bDist = new Timer(60000);
   score = 0;
   rockCount = 0;
   rocksOffScreen = 0;
@@ -40,20 +43,29 @@ void setup() {
 }
 
 void draw() {
-  noCursor();
+
+
   if (play == false) {
     startScreen();
   } else {
+    noCursor();
     background(back1);
+    
     //Add Rocks
     if (rDist.isFinished() == true) {
       rDist.start();
       rocks.add(new Rock(int(random(width)), -55));
       rockCount++;
     }
+    
     if (pDist.isFinished() == true) {
       pDist.start();
       powerups.add(new PowerUp(int(random(width)), -55));
+    }
+    
+    if (bDist.isFinished() == true) {
+    bDist.start();
+    bosses.add(new Boss(-250,200,1));
     }
 
     //display and movement and colishon
@@ -70,8 +82,6 @@ void draw() {
         rocksOffScreen++;
       }
       println(rocks.size());
-      b1.display();
-      b1.move();
     }
     for (int i =0; i < powerups.size(); i++) {
       PowerUp p = powerups.get(i);
@@ -121,10 +131,10 @@ void draw() {
           }
         }
       }
+
       if (l.isOffScreen() == true) {
         lasers.remove(l);
       }
-      println(rocks.size());
       //for (PowerUp p : powerups) {
       //  p.move();
       //  p.display();
@@ -134,6 +144,23 @@ void draw() {
       //  r.display();
       //}
     }
+    for (int i =0; i < bosses.size(); i++) {
+      Boss b = bosses.get(i);
+      for (int j =0; j < lasers.size(); j++) {
+        Laser l = lasers.get(j);
+        if (l.isHit(b)) {
+          lasers.remove(l);
+          b.health -= 20;
+        }
+      }
+      b.display();
+      b.move();
+      if (b.isHit(s1)) {
+        bosses.remove(b);
+        s1.health = s1.health - 100;
+      }
+    }
+    println(rocks.size());
     s1.display();
     s1.move(mouseX, mouseY);
     infoPanel();
@@ -171,7 +198,7 @@ void mousePressed() {
     lasers.add(new Laser(s1.x-40, s1.y));
     lasers.add(new Laser(s1.x+60, s1.y));
     lasers.add(new Laser(s1.x-60, s1.y));
-  }  else if (s1.turretCount == 7) {
+  } else if (s1.turretCount == 7) {
     lasers.add(new Laser(s1.x-30, s1.y));
     lasers.add(new Laser(s1.x+30, s1.y));
     lasers.add(new Laser(s1.x-50, s1.y));
@@ -179,13 +206,36 @@ void mousePressed() {
     lasers.add(new Laser(s1.x, s1.y));
     lasers.add(new Laser(s1.x-70, s1.y));
     lasers.add(new Laser(s1.x+70, s1.y));
-  } else if (s1.turretCount == 6) {
+  } else if (s1.turretCount == 8) {
     lasers.add(new Laser(s1.x-20, s1.y));
     lasers.add(new Laser(s1.x+20, s1.y));
     lasers.add(new Laser(s1.x+40, s1.y));
     lasers.add(new Laser(s1.x-40, s1.y));
     lasers.add(new Laser(s1.x+60, s1.y));
     lasers.add(new Laser(s1.x-60, s1.y));
+    lasers.add(new Laser(s1.x+80, s1.y));
+    lasers.add(new Laser(s1.x-80, s1.y));
+  } else if (s1.turretCount == 9) {
+    lasers.add(new Laser(s1.x-30, s1.y));
+    lasers.add(new Laser(s1.x+30, s1.y));
+    lasers.add(new Laser(s1.x-50, s1.y));
+    lasers.add(new Laser(s1.x+50, s1.y));
+    lasers.add(new Laser(s1.x, s1.y));
+    lasers.add(new Laser(s1.x-70, s1.y));
+    lasers.add(new Laser(s1.x+70, s1.y));
+    lasers.add(new Laser(s1.x-90, s1.y));
+    lasers.add(new Laser(s1.x+90, s1.y));
+  } else {
+    lasers.add(new Laser(s1.x-20, s1.y));
+    lasers.add(new Laser(s1.x+20, s1.y));
+    lasers.add(new Laser(s1.x+40, s1.y));
+    lasers.add(new Laser(s1.x-40, s1.y));
+    lasers.add(new Laser(s1.x+60, s1.y));
+    lasers.add(new Laser(s1.x-60, s1.y));
+    lasers.add(new Laser(s1.x+80, s1.y));
+    lasers.add(new Laser(s1.x-80, s1.y));
+    lasers.add(new Laser(s1.x+100, s1.y));
+    lasers.add(new Laser(s1.x-100, s1.y));
   }
   laser1.play();
 }
@@ -237,9 +287,10 @@ void gameOver() {
   if (keyPressed) {
     loop();
     score = 0;
-    rockCount = -1;
+    rockCount = 0;
     rocksOffScreen = 0;
     s1.health = 100;
+    s1.turretCount = 1;
     play = false;
     startScreen();
   }
