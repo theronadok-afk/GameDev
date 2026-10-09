@@ -34,4 +34,13 @@ class Laser {
       return false;
     }
   }
+  boolean isHit(Boss b) {
+    float d = dist(x, y, b.x, b.y);
+    if (d<250) {
+
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
