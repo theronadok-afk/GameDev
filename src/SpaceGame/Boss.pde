@@ -28,10 +28,9 @@ class Boss {
   }
   
   void move() {
-    if(x < 1920) {
     x += speed;
-    } else if (x > 1) {
-      x -= speed;
+    if (x > 1920 + size) {
+       x = 0 - size;
     }
-  }
+    }
 }
