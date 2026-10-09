@@ -9,7 +9,7 @@
 [Link for Source Code](http://github.com/theronadok-afk/GameDev/tree/main/src/SpaceGame)
 
 ## Game Overview
-Object oriented game using images and sounds with multiple levels and powerups. 
+Object oriented game using images and sounds with multiple levels and powerups. Shoot rocks and bosses to get points. Don't let rocks hit you or get to the bottom.
 
 ## How to Run 
 Built with prossesing
