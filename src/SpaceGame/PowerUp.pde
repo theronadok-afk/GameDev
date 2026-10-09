@@ -14,11 +14,11 @@ class PowerUp {
     c1 = color(#bdbdbd);
     if (size > 150) {
       if (size < 300){
-      type = 's';
+      type = 't';
       // t
       }
     } if (size > 300){
-      type = 's';
+      type = 'h';
       // h
     }
     if (size < 150) {
