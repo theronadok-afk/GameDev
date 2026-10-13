@@ -40,6 +40,7 @@ void setup() {
   GameOver1 = new SoundFile(this, "GameOver1.mp3");
   //rocks.add(new Rock(int(random(width)), -60));
   //powerups.add(new PowerUp(int(random(width)), -60));
+  level = 1;
 }
 
 void draw() {
@@ -50,22 +51,22 @@ void draw() {
   } else {
     noCursor();
     background(back1);
-    
+
     //Add Rocks
     if (rDist.isFinished() == true) {
       rDist.start();
       rocks.add(new Rock(int(random(width)), -55));
       rockCount++;
     }
-    
+
     if (pDist.isFinished() == true) {
       pDist.start();
       powerups.add(new PowerUp(int(random(width)), -55));
     }
-    
+
     if (bDist.isFinished() == true) {
-    bDist.start();
-    bosses.add(new Boss(-250,200,1));
+      bDist.start();
+      bosses.add(new Boss(-250, 200, 1));
     }
 
     //display and movement and colishon
@@ -151,10 +152,15 @@ void draw() {
         if (l.isHit(b)) {
           lasers.remove(l);
           b.health -= 20;
-          if(b.health < 1) {
-          bosses.remove(b);
-          score += 2500;
-      }
+          if (b.health < 1) {
+            bosses.remove(b);
+            score += 2500;
+            level += 1;
+            rDist.totalTime -= 100;
+             if (rDist.totalTime < 100) {
+               rDist.totalTime = 100;
+             }
+          }
         }
       }
       b.display();
