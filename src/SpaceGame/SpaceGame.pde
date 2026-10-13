@@ -157,9 +157,9 @@ void draw() {
             score += 2500;
             level += 1;
             rDist.totalTime -= 100;
-             if (rDist.totalTime < 100) {
-               rDist.totalTime = 100;
-             }
+            if (rDist.totalTime < 100) {
+              rDist.totalTime = 100;
+            }
           }
         }
       }
@@ -273,9 +273,10 @@ void infoPanel() {
   if (rocksOffScreen>7) {
     fill(255, 0, 0);
   }
+  
   text("Rocks Passed: " +  rocksOffScreen, 660, 35);
-  text("Level: " + level, 880, 35);
   fill(255);
+  text("Level: " + level, 880, 35);
 }
 
 void startScreen() {
@@ -293,8 +294,8 @@ void gameOver() {
   // Add Game over grafic
   background(0);
   fill(255);
-  if (score > hScore){
-  hScore = score;
+  if (score > hScore) {
+    hScore = score;
   }
   textMode(CENTER);
   text("Game Over", width/2, height/2);
@@ -307,6 +308,7 @@ void gameOver() {
     score = 0;
     rockCount = 0;
     rocksOffScreen = 0;
+    level = 1;
     s1.health = 100;
     s1.turretCount = 1;
     play = false;
