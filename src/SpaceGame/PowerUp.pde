@@ -17,11 +17,10 @@ class PowerUp {
       type = 't';
       // t
       }
-    } if (size > 300){
+    } else if (size > 300){
       type = 'h';
       // h
-    }
-    if (size < 150) {
+    } else  {
       type = 's';
     }
     
@@ -39,9 +38,9 @@ class PowerUp {
       fill(255,0,0);
     }
     ellipse(x, y, size,size);
-    fill(255);
-    textSize(20);
-    text(type,x,y);
+    //fill(255);
+    //textSize(20);
+    //text(type,x,y);
     
   }
 
