@@ -274,9 +274,9 @@ void infoPanel() {
   if (rocksOffScreen>7) {
     fill(255, 0, 0);
   }
-  
+
   text("Rocks Passed: " +  rocksOffScreen, 660, 35);
-  fill(255); 
+  fill(255);
   text("Level: " + level, 880, 35);
 }
 
@@ -305,7 +305,6 @@ void gameOver() {
   text("High score this run: " + hScore, width/2, height/2-60);
   text("Press any key to restart", width/2, height/2 + 20);
   if (keyPressed) {
-    loop();
     score = 0;
     rockCount = 0;
     rocksOffScreen = 0;
@@ -314,6 +313,32 @@ void gameOver() {
     s1.turretCount = 1;
     play = false;
     startScreen();
+    for (int i = rocks.size() - 1; i >= 0; i--) {
+      Rock r = rocks.get(i);
+      //if (r.isOffScreen()) {
+      rocks.remove(i);
+      //}
+    }
+    for (int i = powerups.size() - 1; i >= 0; i--) {
+      PowerUp p = powerups.get(i);
+      //if (p.isOffScreen()) {
+      powerups.remove(i);
+      //}
+    }
+    for (int i = bosses.size() - 1; i >= 0; i--) {
+      Boss b = bosses.get(i);
+      //if (p.isOffScreen()) {
+      bosses.remove(i);
+      //}
+    }
+    for (int i = lasers.size() - 1; i >= 0; i--) {
+      Laser l = lasers.get(i);
+      //if (p.isOffScreen()) {
+      lasers.remove(i);
+      //}
+    }
+    rDist.totalTime = 1000;
+    pDist.totalTime = 10000;
+    bDist.totalTime = 60000;
   }
-  //noLoop();
 }
