@@ -15,6 +15,7 @@ Object oriented game using images and sounds with multiple levels and powerups. 
 Built with prossesing
 Prossesing version 4.0.1
 Main folder: SpaceGame.pde
+Required libraries: GifAnimation, Sound
 
 ## Controls
 Move curser to move
@@ -24,4 +25,8 @@ Click to shoot
 1. +20 health
 2. -2 Rocks of seceen
 3. +1 Bullet
+
+## My Chosen Additional Systems
+- Boss
+- Game-over screen
 
