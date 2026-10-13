@@ -154,7 +154,7 @@ void draw() {
           b.health -= 20;
           if (b.health < 1) {
             bosses.remove(b);
-            score += 2500;
+            score += 5000;
             level += 1;
             rDist.totalTime -= 100;
              if (rDist.totalTime < 100) {
