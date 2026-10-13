@@ -9,7 +9,7 @@ class Boss {
     this.lvl = lvl;
     size = 250;
     duration = 20000;
-    health = 10000;
+    health = 2500;
     speed = 5;
     isHit = false;
     if (lvl == 1) {
