@@ -151,6 +151,10 @@ void draw() {
         if (l.isHit(b)) {
           lasers.remove(l);
           b.health -= 20;
+          if(b.health < 1) {
+          bosses.remove(b);
+          score += 2500;
+      }
         }
       }
       b.display();
