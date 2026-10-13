@@ -12,11 +12,9 @@ class PowerUp {
     size = int(random(50,500));
     speed = int(random(1, 8));
     c1 = color(#bdbdbd);
-    if (size > 150) {
-      if (size < 300){
+    if (size > 150 && size < 300) {
       type = 't';
       // t
-      }
     } else if (size > 300){
       type = 'h';
       // h
