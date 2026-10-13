@@ -157,6 +157,7 @@ void draw() {
             score += 2500;
             level += 1;
             rDist.totalTime -= 100;
+            b1.health += 2000;
             if (rDist.totalTime < 1) {
               rDist.totalTime = 1;
             }
@@ -275,7 +276,7 @@ void infoPanel() {
   }
   
   text("Rocks Passed: " +  rocksOffScreen, 660, 35);
-  fill(255);
+  fill(255); 
   text("Level: " + level, 880, 35);
 }
 
