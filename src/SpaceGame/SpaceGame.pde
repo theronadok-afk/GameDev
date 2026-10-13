@@ -6,7 +6,7 @@ SoundFile PowerUp1;
 SoundFile GameOver1;
 Ship s1;
 Boss b1;
-int score, rockCount, rocksOffScreen, laserSpeed, level;
+int score, rockCount, rocksOffScreen, laserSpeed, level, hScore;
 boolean play;
 ArrayList<Rock> rocks = new ArrayList<Rock>();
 ArrayList<Laser> lasers = new ArrayList<Laser>();
@@ -26,7 +26,7 @@ void setup() {
   s1 = new Ship();
   rDist = new Timer(1000);
   rDist.start();
-  pDist = new Timer(7500);
+  pDist = new Timer(10000);
   pDist.start();
   bDist = new Timer(60000);
   score = 0;
@@ -154,7 +154,7 @@ void draw() {
           b.health -= 20;
           if (b.health < 1) {
             bosses.remove(b);
-            score += 5000;
+            score += 2500;
             level += 1;
             rDist.totalTime -= 100;
              if (rDist.totalTime < 100) {
@@ -274,6 +274,8 @@ void infoPanel() {
     fill(255, 0, 0);
   }
   text("Rocks Passed: " +  rocksOffScreen, 660, 35);
+  text("Level: " + level, 880, 35);
+  fill(255);
 }
 
 void startScreen() {
@@ -291,8 +293,14 @@ void gameOver() {
   // Add Game over grafic
   background(0);
   fill(255);
+  if (score > hScore){
+  hScore = score;
+  }
+  textMode(CENTER);
   text("Game Over", width/2, height/2);
   text("Score: " + score, width/2, height/2-20);
+  text("Level: " + level, width/2, height/2-40);
+  text("High score this run: " + hScore, width/2, height/2-60);
   text("Press any key to restart", width/2, height/2 + 20);
   if (keyPressed) {
     loop();
