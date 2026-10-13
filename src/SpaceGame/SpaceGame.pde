@@ -157,8 +157,8 @@ void draw() {
             score += 2500;
             level += 1;
             rDist.totalTime -= 100;
-            if (rDist.totalTime < 100) {
-              rDist.totalTime = 100;
+            if (rDist.totalTime < 1) {
+              rDist.totalTime = 1;
             }
           }
         }
